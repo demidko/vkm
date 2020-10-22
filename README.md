@@ -11,7 +11,7 @@
 `dotnet run ivan@mail.ru 123456 'harpens kraft'`  
 
 Пример последующих скачиваний:  
-`dotnet run 'harpens kraft'`
+`dotnet run harpens`
 
 #### Благодарности:
 * Команде [VkNet](https://github.com/vknet) за [имплементацию VK API](https://vknet.github.io/vk/)  
