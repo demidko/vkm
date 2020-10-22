@@ -3,9 +3,9 @@
 ### Как запускать проект напрямую из исходного кода?
 1. Установить [.NET](https://dot.net)
 2. В директории репозитория выполнить команду:  
-`dotnet run [login] [password] [your-audio-name]`  
+`dotnet run [login] [password] [your-vk-saved-audio-name]`  
 После этого можно запускать используя кеш предыдущей авторизации:  
-`dotnet run [your-audio-name]`  
+`dotnet run [your-vk-saved-audio-name]`  
 
 Пример скачивания музыки в первый раз:  
 `dotnet run ivan@mail.ru 123456 'harpens kraft'`  
