@@ -11,12 +11,13 @@ using VkNet.Utils.AntiCaptcha;
 using static System.IO.File;
 using static System.Console;
 using static System.ConsoleColor;
+using static Application;
 using static VkNet.Enums.Filters.Settings;
 
 /// <summary>
 /// Модуль отвечает за авторизацию пользователя в ВК
 /// </summary>
-internal static class VkAuthorization
+internal static class Vk
 {
     /// <summary>
     /// Кеш содержит две строки (1 логин, 2 пароль)
@@ -26,9 +27,9 @@ internal static class VkAuthorization
     /// <summary>
     /// Метод входит под именем и паролем пользователя
     /// </summary>
-    /// <param name="args">номер (или email), пароль</param>
+    /// <param name="args">номер (или email), пароль или пустой список</param>
     /// <returns>VK Api</returns>
-    internal static VkApi LoginForVkApi(IReadOnlyList<string> args)
+    internal static VkApi LoginForVkApi(this IReadOnlyList<string> args)
     {
         var services = new ServiceCollection();
         // Включаем доступ к своим сообщениям и комментариям
@@ -55,10 +56,7 @@ internal static class VkAuthorization
         {
             0 => LoadAuthorizationDataFromCache(),
             2 => LoadAuthorizationDataFromInput(args),
-            _ => throw new ArgumentException(
-                "Usage:\n" +
-                "  With authorization data: dotnet CleanMyVk [login] [password]\n" +
-                "  With cache: dotnet CleanMyVk")
+            _ => throw new ArgumentException(UsageGuide)
         };
 
 
