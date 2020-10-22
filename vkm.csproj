@@ -1,16 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
-        <Nullable>enable</Nullable>
-        <LangVersion>9</LangVersion>
-        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-        <RootNamespace />
-    </PropertyGroup>
-    <ItemGroup>
-        <!--VK API без необходимости вручную получать токен-->
-        <PackageReference Include="VkNet" Version="1.56.0" />
-        <!--Дает доступ к сообщениям и комментариям VK api-->
-        <PackageReference Include="VkNet.AudioBypassService" Version="1.7.0" />
-    </ItemGroup>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>9</LangVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RootNamespace/>
+  </PropertyGroup>
+  <ItemGroup>
+    <!--VK API без необходимости вручную получать токен-->
+    <PackageReference Include="VkNet" Version="1.56.0"/>
+    <!--Дает доступ к сообщениям и комментариям VK api-->
+    <PackageReference Include="VkNet.AudioBypassService" Version="1.7.0"/>
+  </ItemGroup>
 </Project>
