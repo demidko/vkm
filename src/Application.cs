@@ -19,9 +19,7 @@ internal static class Application
         var lemma = args
             .LastOrDefault()
             ?.ToLowerInvariant() ?? throw new ArgumentException(UsageGuide);
-
-        var downloader = new HttpClient();
-
+        
         var audios = args.SkipLast(1)
             .ToImmutableList()
             .LoginForVkApi()
@@ -29,6 +27,8 @@ internal static class Application
             .Get(new AudioGetParams {Count = 6000})
             .Where(audio => audio.Title.ToLowerInvariant().Contains(lemma))
             .Select(audio => (Filename: $"{audio.Title}.mp3", Url: audio.Url.RestoreMp3Url()));
+        
+        using var downloader = new HttpClient();
 
         foreach (var (filename, url) in audios)
         {
