@@ -358,3 +358,6 @@ MigrationBackup/
 # MacOS file
 .DS_Store
 
+# tests
+*.mp3
+

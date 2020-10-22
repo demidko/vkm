@@ -27,7 +27,7 @@ internal static class Vk
     /// <summary>
     /// Метод входит под именем и паролем пользователя
     /// </summary>
-    /// <param name="args">номер (или email), пароль или пустой список</param>
+    /// <param name="args">логин + пароль или пустой список</param>
     /// <returns>VK Api</returns>
     internal static VkApi LoginForVkApi(this IReadOnlyList<string> args)
     {
