@@ -3,7 +3,14 @@
 ### Как запускать проект напрямую из исходного кода?
 1. Установить [.NET](https://dot.net)
 2. В директории репозитория выполнить команду:  
-`dotnet run -- [login] [password] [your-audio-name]`  
+`dotnet run [login] [password] [your-audio-name]`  
 После этого можно запускать используя кеш предыдущей авторизации:  
-`dotnet run [your-audio-name]`
+`dotnet run [your-audio-name]`  
+
+Пример запуска в первый раз:  
+`dotnet run ivan@mail.ru 123456 'harpens kraft'`  
+
+Пример последующих запусков:  
+`dotnet run 'harpens kraft'`
+
 

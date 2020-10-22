@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using OpenQA.Selenium;
 using VkNet;
 using VkNet.AudioBypassService.Extensions;
 using VkNet.Model;

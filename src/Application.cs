@@ -1,22 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
-using VkNet;
-using VkNet.Exception;
 using VkNet.Model.RequestParams;
-using VkNet.Utils;
 using static System.Text.RegularExpressions.Regex;
-using static System.TimeSpan;
-using static OpenQA.Selenium.By;
-using static Vk;
 
 
 internal static class Application
