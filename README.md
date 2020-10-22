@@ -15,7 +15,7 @@
 
 #### Благодарности:
 * Команде [VkNet](https://github.com/vknet) за [имплементацию VK API](https://vknet.github.io/vk/)  
-* Уважаемому [@atckun](https://github.com/atckun) за [VkNet.AudioBypass](https://github.com/atckun/VkNet.AudioBypass)  
+* Уважаемому @atckun за [VkNet.AudioBypass](https://github.com/atckun/VkNet.AudioBypass)  
 * Хабраюзеру [@SuperHackerVk](https://habr.com/ru/users/superhackervk) за [способ получения mp3 ссылки](https://habr.com/ru/post/519302/)
 
 
