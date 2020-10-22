@@ -27,10 +27,8 @@ internal static class Vk
     /// <returns>VK Api</returns>
     internal static VkApi LoginForVkApi(this IReadOnlyList<string> args)
     {
-        var services = new ServiceCollection();
         // Включаем доступ к своим сообщениям и комментариям
-        services.AddAudioBypass();
-        var api = new VkApi(services);
+        var api = new VkApi(new ServiceCollection().AddAudioBypass());
         var (login, password) = LoadAuthorizationData(args);
         api.Authorize(new ApiAuthParams
         {
@@ -72,11 +70,9 @@ internal static class Vk
     {
         "Reading login and password from cache...".Println(DarkBlue);
         if (!Exists(CachePath))
-        {
             throw new FileNotFoundException(
                 $"Authorization cache wasn't found. Please restart application with login and password"
             );
-        }
         var lines = ReadAllLines(CachePath);
         return lines.Length == 2
             ? (lines[0], lines[1])
