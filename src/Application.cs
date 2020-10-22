@@ -7,8 +7,6 @@ using System.Threading.Tasks;
 using VkNet.Model.RequestParams;
 using static System.ConsoleColor;
 using static System.IO.File;
-using static System.Text.RegularExpressions.Regex;
-
 
 internal static class Application
 {
