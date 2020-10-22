@@ -24,14 +24,14 @@ internal static class Application
             .LoginForVkApi()
             .Audio.Get(new AudioGetParams {Count = 6000})
             .Where(x => x.Title.ToUpperInvariant().Contains(lemma))
-            .Select(x => (Filename: $"{x.Title}.mp3", Url: x.Url.RestoreMp3()));
+            .Select(x => (x.Title, Url: x.Url.RestoreMp3()));
 
-        using var downloader = new HttpClient();
+        using var http = new HttpClient();
 
-        foreach (var (filename, url) in audios)
+        foreach (var (title, url) in audios)
         {
-            $"Downloading {filename}".Println(DarkBlue);
-            await WriteAllBytesAsync(filename, await downloader.GetByteArrayAsync(url));
+            $"Downloading {title}".Println(DarkBlue);
+            await WriteAllBytesAsync($"{title}.mp3", await http.GetByteArrayAsync(url));
         }
     }
 
