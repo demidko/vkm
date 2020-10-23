@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using VkNet.Model.Attachments;
 using VkNet.Model.RequestParams;
 using static System.ConsoleColor;
 using static System.IO.File;
@@ -24,7 +25,7 @@ internal static class Application
             .LoginForVkApi()
             .Audio.Get(new AudioGetParams {Count = 6000})
             .Where(x => x.Title.ToUpperInvariant().Contains(lemma))
-            .Select(x => (x.Title, Url: x.Url.RestoreMp3()));
+            .Select(x => (x.Title, Url: x.GetMp3Url()));
 
         using var http = new HttpClient();
 
@@ -35,8 +36,8 @@ internal static class Application
         }
     }
 
-    private static string RestoreMp3(this Uri url) => Regex.Replace(
-        url.ToString(),
+    private static string GetMp3Url(this Audio audio) => Regex.Replace(
+        audio.Url.ToString(),
         @"/[a-zA-Z\d]{6,}(/.*?[a-zA-Z\d]+?)/index.m3u8()",
         @"$1$2.mp3"
     );
