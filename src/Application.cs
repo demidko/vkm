@@ -10,37 +10,31 @@ using static System.ConsoleColor;
 using static System.IO.File;
 using static Vk;
 
-internal static class Application
+var vk = args.Length switch
 {
-    private static async Task Main(string[] args)
-    {
-        var vk = args.Length switch
-        {
-            1 => LoginToVkApi(),
-            3 => LoginToVkApi(args[1], args[2]),
-            _ => throw new ArgumentException(
-                "Invalid arguments. Usage:\n" +
-                "  With authorization data: dotnet vkm [login] [password] [audio]\n" +
-                "  With cache: dotnet vkm [audio]"
-            )
-        };
+    1 => LoginToVkApi(),
+    3 => LoginToVkApi(args[1], args[2]),
+    _ => throw new ArgumentException(
+        "Invalid arguments. Usage:\n" +
+        "  With authorization data: dotnet vkm [login] [password] [audio]\n" +
+        "  With cache: dotnet vkm [audio]"
+    )
+};
 
-        var lemma = args.Last().ToUpperInvariant();
+var lemma = args.Last().ToUpperInvariant();
 
-        var audios = vk.Audio.Get(new AudioGetParams {Count = 6000})
-            .Where(x => x.Title.ToUpperInvariant().Contains(lemma))
-            .Select(x => (x.Title, Url: Regex.Replace(
-                x.Url.ToString(),
-                @"/[a-zA-Z\d]{6,}(/.*?[a-zA-Z\d]+?)/index.m3u8()",
-                @"$1$2.mp3"
-            )));
+var audios = vk.Audio.Get(new AudioGetParams { Count = 6000 })
+    .Where(x => x.Title.ToUpperInvariant().Contains(lemma))
+    .Select(x => (x.Title, Url: Regex.Replace(
+        x.Url.ToString(),
+        @"/[a-zA-Z\d]{6,}(/.*?[a-zA-Z\d]+?)/index.m3u8()",
+        @"$1$2.mp3"
+    )));
 
-        using var http = new HttpClient();
+using var http = new HttpClient();
 
-        foreach (var (title, url) in audios)
-        {
-            $"Downloading {title}...".Println(DarkBlue);
-            await WriteAllBytesAsync($"{title}.mp3", await http.GetByteArrayAsync(url));
-        }
-    }
+foreach (var (title, url) in audios)
+{
+    $"Downloading {title}...".Println(DarkBlue);
+    await WriteAllBytesAsync($"{title}.mp3", await http.GetByteArrayAsync(url));
 }
