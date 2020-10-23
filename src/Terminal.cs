@@ -17,10 +17,4 @@ internal static class Terminal
         obj.Print(color);
         WriteLine();
     }
-
-    internal static string Input(string message, ConsoleColor color = Black)
-    {
-        message.Print(color);
-        return ReadLine()!;
-    }
 }
