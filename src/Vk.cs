@@ -20,9 +20,10 @@ internal static class Vk
     /// <summary>
     /// Метод входит в VK API под именем и паролем пользователя
     /// </summary>
-    /// <param name="user">Пользователь</param>
+    /// <param name="login">логин</param>
+    /// <param name="password">пароль</param>
     /// <returns>VK Api</returns>
-    internal static VkApi LoginToVkApi(this (string Login, string Password) user)
+    internal static VkApi LoginToVkApi(string login, string password)
     {
         // Включаем доступ к своим сообщениям и комментариям
         var api = new VkApi(new ServiceCollection().AddAudioBypass());
@@ -30,12 +31,12 @@ internal static class Vk
         {
             // Используем идентификатор который откопали где-то в интернете
             ApplicationId = 1980660,
-            Login = user.Login,
-            Password = user.Password,
+            Login = login,
+            Password = password,
             Settings = All
         });
         $"Login as vk.com/id{api.UserId}".Println(DarkBlue);
-        WriteAllLines(CachePath, new[] {user.Login, user.Password});
+        WriteAllLines(CachePath, new[] {login, password});
         return api;
     }
 
@@ -57,6 +58,6 @@ internal static class Vk
             : throw new IOException(
                 $"Invalid authorization cache. Please restart application with login and password"
             );
-        return (login, password).LoginToVkApi();
+        return LoginToVkApi(login, password);
     }
 }

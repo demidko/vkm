@@ -17,7 +17,7 @@ internal static class Application
         var vk = args.Length switch
         {
             1 => LoginToVkApi(),
-            3 => (args[0], args[2]).LoginToVkApi(),
+            3 => LoginToVkApi(args[1], args[2]),
             _ => throw new ArgumentException(
                 "Invalid arguments. Usage:\n" +
                 "  With authorization data: dotnet vkm [login] [password] [audio]\n" +
@@ -27,8 +27,7 @@ internal static class Application
 
         var lemma = args.Last().ToUpperInvariant();
 
-        var audios = vk
-            .Audio.Get(new AudioGetParams {Count = 6000})
+        var audios = vk.Audio.Get(new AudioGetParams {Count = 6000})
             .Where(x => x.Title.ToUpperInvariant().Contains(lemma))
             .Select(x => (x.Title, Url: Regex.Replace(
                 x.Url.ToString(),
