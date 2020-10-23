@@ -23,7 +23,7 @@ internal static class Vk
     /// <param name="login">логин</param>
     /// <param name="password">пароль</param>
     /// <returns>VK Api</returns>
-    internal static VkApi LoginToVkApi(string login, string password)
+    internal static VkApi LoginToVkApi(this (string Login, string Password) user)
     {
         // Включаем доступ к своим сообщениям и комментариям
         var api = new VkApi(new ServiceCollection().AddAudioBypass());
@@ -31,8 +31,8 @@ internal static class Vk
         {
             // Используем идентификатор который откопали где-то в интернете
             ApplicationId = 1980660,
-            Login = login,
-            Password = password,
+            Login = user.Login,
+            Password = user.Password,
             Settings = All
         });
         $"Login as vk.com/id{api.UserId}".Println(DarkBlue);

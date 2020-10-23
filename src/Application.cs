@@ -17,7 +17,7 @@ internal static class Application
         var vk = args.Length switch
         {
             1 => LoginToVkApi(),
-            3 => LoginToVkApi(args[0], args[2]),
+            3 => (Login: args[0], Password: args[2]).LoginToVkApi(),
             _ => throw new ArgumentException(
                 "Invalid arguments. Usage:\n" +
                 "  With authorization data: dotnet vkm [login] [password] [audio]\n" +
