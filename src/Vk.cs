@@ -57,6 +57,6 @@ internal static class Vk
             : throw new IOException(
                 $"Invalid authorization cache. Please restart application with login and password"
             );
-        return LoginToVkApi(login, password);
+        return (login, password).LoginToVkApi();
     }
 }
