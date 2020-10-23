@@ -20,8 +20,7 @@ internal static class Vk
     /// <summary>
     /// Метод входит в VK API под именем и паролем пользователя
     /// </summary>
-    /// <param name="login">логин</param>
-    /// <param name="password">пароль</param>
+    /// <param name="user">Пользователь</param>
     /// <returns>VK Api</returns>
     internal static VkApi LoginToVkApi(this (string Login, string Password) user)
     {
@@ -36,7 +35,7 @@ internal static class Vk
             Settings = All
         });
         $"Login as vk.com/id{api.UserId}".Println(DarkBlue);
-        WriteAllLines(CachePath, new[] {login, password});
+        WriteAllLines(CachePath, new[] {user.Login, user.Password});
         return api;
     }
 
