@@ -13,7 +13,6 @@
 Пример последующих скачиваний:  
 `dotnet run harpens`
 
-##### Благодарность 
-* Хабраюзеру [@SuperHackerVk](https://habr.com/ru/users/superhackervk) за [способ получения mp3 ссылки](https://habr.com/ru/post/519302/)
+##### Благодарность хабраюзеру [@SuperHackerVk](https://habr.com/ru/users/superhackervk) за [способ получения mp3 ссылки](https://habr.com/ru/post/519302/)
 
 
