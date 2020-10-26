@@ -13,7 +13,7 @@ using static Vk;
 var vk = args.Length switch
 {
     1 => LoginToVkApi(),
-    3 => LoginToVkApi(args[1], args[2]),
+    3 => LoginToVkApi(args[0], args[1]),
     _ => throw new ArgumentException(
         "Invalid arguments. Usage:\n" +
         "  With authorization data: dotnet vkm [login] [password] [audio]\n" +
