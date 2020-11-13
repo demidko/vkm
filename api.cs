@@ -52,12 +52,13 @@ internal static class Vk
             throw new FileNotFoundException(
                 $"Authorization cache wasn't found. Please restart application with login and password"
             );
-        var lines = ReadAllLines(CachePath);
-        var (login, password) = lines.Length == 2
-            ? (lines[0], lines[1])
-            : throw new IOException(
+        var (l, p) = ReadAllLines(CachePath) switch
+        {
+            {Length: 2} lines => (lines[0], lines[1]),
+            _ => throw new IOException(
                 $"Invalid authorization cache. Please restart application with login and password"
-            );
+            )
+        };
         return LoginToVkApi(login, password);
     }
 }
