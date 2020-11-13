@@ -9,19 +9,20 @@ using VkNet.Model.RequestParams;
 using static System.IO.Directory;
 using static System.IO.File;
 using static Vk;
+using System.Linq;
 
 
 await Parser.Default.ParseArguments<Options>(args).WithParsedAsync(async options =>
 {
     using var api = options.Login switch
     {
-        "" => LoginToVkApiWithCache(),
+        null or {Length: 0} => LoginToVkApiWithCache(),
         _ => LoginToVkApi(options.Login, options.Password)
     };
 
     Func<Audio, bool> filter = options.Title switch
     {
-        "" => _ => true,
+        null or {Length: 0} => _ => true,
         _ => x => x.Title.ToUpperInvariant().Contains(options.Title)
     };
 
