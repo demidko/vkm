@@ -15,7 +15,7 @@ internal static class Vk
 {
     private const string Cache = ".authorization";
 
-    internal static string UserLink(this VkApi api) =>
+    internal static string GetUserLink(this VkApi api) =>
         $"vk.com/{api.Account.GetProfileInfo().ScreenName ?? $"id{api.UserId}"}";
 
     internal static VkApi LoginToVkApi(string withLogin, string andPassword)
@@ -33,7 +33,7 @@ internal static class Vk
             Password = andPassword,
             Settings = All
         });
-        $"Login as {api.UserLink()}".Log();
+        $"Login as {api.GetUserLink()}".Log();
         WriteAllLines(Cache, new[] {withLogin, andPassword});
         return api;
     }

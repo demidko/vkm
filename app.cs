@@ -21,7 +21,7 @@ await Parser.Default.ParseArguments<Options>(args).WithParsedAsync(async options
 
     var directory = options.Directory switch
     {
-        "" => api.UserLink(),
+        "" => api.GetUserLink(),
         _ => options.Directory
     };
 
