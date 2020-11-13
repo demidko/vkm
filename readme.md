@@ -5,7 +5,7 @@
 
 ### Как собирать?
 
-В директории репозитория выполнить команду:
+В директории репозитория выполните команду:
 
 ```
 dotnet publish -c Release -r RID -p:PublishSingleFile=true -p:PublishTrimmed=true
