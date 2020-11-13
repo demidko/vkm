@@ -12,7 +12,7 @@
         <PackageReference Include="CommandLineParser" Version="2.8.0" />
         <!--VK API без необходимости вручную получать токен-->
         <PackageReference Include="VkNet" Version="1.57.0" />
-        <!--Дает доступ к сообщениям и комментариям VK api-->
+        <!--Дает доступ к сообщениям, комментариям и музыке VK-->
         <PackageReference Include="VkNet.AudioBypassService" Version="1.7.0" />
     </ItemGroup>
 </Project>

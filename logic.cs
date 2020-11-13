@@ -14,40 +14,40 @@ using static System.IO.File;
 using static Vk;
 
 
-Parser.Default.ParseArguments<Options>(args).WithParsed(async args =>
+await Parser.Default.ParseArguments<Options>(args).WithParsedAsync(async options =>
 {
-    var api = args.Login switch
+    
+    using var api = options.Login switch
     {
         "" => LoginToVkApi(),
-        _ => LoginToVkApi(args.Login, args.Password);
+        _ => LoginToVkApi(options.Login, options.Password)
     };
 
-    if (!Directory.Exists(args.Path))
-    {
-        CreateDirectory(args.Path);
-    }
-
-    Func<Audio, bool> filter = args.Title switch
+    Func<Audio, bool> filter = options.Title switch
     {
         "" => _ => true,
-        _ => x => x.Title.ToUpperInvariant().Contains(args.Title)
+        _ => x => x.Title.ToUpperInvariant().Contains(options.Title)
     };
+
+    using var http = new HttpClient();
 
     var audios = api.Audio
         .Get(new AudioGetParams {Count = 6000})
         .Where(filter)
-        .Select(x => (x.Title, Url: Regex.Replace(
+        .Select(x => (Title: $"{x.Artist} - {x.Title}", Url: Regex.Replace(
             x.Url.ToString(),
             @"/[a-zA-Z\d]{6,}(/.*?[a-zA-Z\d]+?)/index.m3u8()",
             @"$1$2.mp3"
         )));
 
-    Func<string, Task<byte[]>> download = new HttpClient().GetByteArrayAsync;
+    if (!Directory.Exists(options.Path))
+    {
+        CreateDirectory(options.Path);
+    }
 
     foreach (var (title, url) in audios)
     {
         $"Downloading {title}...".Println(DarkBlue);
-
-        WriteAllBytes($"{title}.mp3", await download(url));
+        WriteAllBytes($"{options.Path}/{title}.mp3", await http.GetByteArrayAsync(url));
     }
 });
