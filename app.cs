@@ -41,6 +41,13 @@ await Parser.Default.ParseArguments<Options>(args).WithParsedAsync(async options
     foreach (var (title, url) in audios)
     {
         $"Downloading {title}...".Log();
-        WriteAllBytes($"{options.Path}/{title}.mp3", await http.GetByteArrayAsync(url));
+        try
+        {
+            WriteAllBytes($"{options.Path}/{title}.mp3", await http.GetByteArrayAsync(url));
+        }
+        catch (Exception e)
+        {
+            e.LogError();
+        }
     }
 });

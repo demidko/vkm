@@ -19,6 +19,6 @@ internal class Options
 
     [Option('d', "directory", Required = false,
         HelpText =
-            "Music download directory. If the directory does not exist, it will be created. The default is the current directory")]
-    public string Path { init; get; } = Empty;
+            "Music download directory. If the directory does not exist, it will be created. The default is ./vk_music")]
+    public string Path { init; get; } = "vk_music";
 }
