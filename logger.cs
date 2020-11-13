@@ -14,5 +14,6 @@ internal static class Logger
         ForegroundColor = previousColor;
     }
 
-    internal static void LogError<T>(this T obj) where T : Exception => obj.Log(withColor: DarkRed);
+    internal static void LogError<T>(this T obj) => obj.Log(withColor: DarkRed);
+    internal static void LogWarn<T>(this T obj) => obj.Log(withColor: DarkYellow);
 }

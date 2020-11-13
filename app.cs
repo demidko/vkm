@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text.RegularExpressions;
 using VkNet.Model.Attachments;
 using VkNet.Model.RequestParams;
@@ -18,6 +19,14 @@ await Parser.Default.ParseArguments<Options>(args).WithParsedAsync(async options
         _ => LoginToVkApi(options.Login, options.Password)
     };
 
+    var directory = options.Directory switch
+    {
+        "" => api.UserLink(),
+        _ => options.Directory
+    };
+
+    if (!Directory.Exists(directory)) CreateDirectory(directory);
+
     Func<Audio, bool> filter = options.Title switch
     {
         "" => always => true,
@@ -27,26 +36,25 @@ await Parser.Default.ParseArguments<Options>(args).WithParsedAsync(async options
     var audios = api.Audio
         .Get(new AudioGetParams {Count = 6000})
         .Where(filter)
-        .Select(x => (Title: $"{x.Artist} - {x.Title}", Url: Regex.Replace(
-            x.Url.ToString(),
-            @"/[a-zA-Z\d]{6,}(/.*?[a-zA-Z\d]+?)/index.m3u8()",
-            @"$1$2.mp3"
-        )));
-
-    if (!Directory.Exists(options.Path)) CreateDirectory(options.Path);
+        .Select(x => (
+            Filename: $"{directory}/{x.Artist} - {x.Title}.mp3",
+            Url: Regex.Replace(
+                x.Url.ToString(),
+                @"/[a-zA-Z\d]{6,}(/.*?[a-zA-Z\d]+?)/index.m3u8()",
+                @"$1$2.mp3"
+            )))
+        .Where(x => !File.Exists(x.Filename));
 
     using var http = new HttpClient();
 
-    foreach (var (title, url) in audios)
-    {
-        $"Downloading {title}...".Log();
+    foreach (var (filename, url) in audios)
         try
         {
-            WriteAllBytes($"{options.Path}/{title}.mp3", await http.GetByteArrayAsync(url));
+            $"Downloading {filename}...".Log();
+            WriteAllBytes(filename, await http.GetByteArrayAsync(url));
         }
         catch (Exception e)
         {
             e.LogError();
         }
-    }
 });
