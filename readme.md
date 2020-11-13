@@ -19,7 +19,7 @@ dotnet publish -c Release -r RID -p:PublishSingleFile=true -p:PublishTrimmed=tru
 dotnet publish -c Release -r linux-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true
 ```
 
-После сборки приложение можно будет запускать из командной строки без каких либо runtime-зависимостей.
+После сборки приложение можно будет запускать из командной строки без зависимости от фреймворка.
 
 ### Как запускать проект напрямую из исходного кода?
 
