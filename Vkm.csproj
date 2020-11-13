@@ -3,11 +3,13 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>net5.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <LangVersion>latest</LangVersion>
+        <LangVersion>preview</LangVersion>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <RootNamespace />
     </PropertyGroup>
     <ItemGroup>
+        <!--Парсер параметров командной строки-->
+        <PackageReference Include="CommandLineParser" Version="2.8.0" />
         <!--VK API без необходимости вручную получать токен-->
         <PackageReference Include="VkNet" Version="1.57.0" />
         <!--Дает доступ к сообщениям и комментариям VK api-->
