@@ -11,10 +11,8 @@
 dotnet publish -c Release -r RID -p:PublishSingleFile=true -p:PublishTrimmed=true
 ```
 
-Где вместо `RID` должен стоять идентификатор системы: `linux-x64`, `linux-arm`, `linux-x64`, ` osx-x64`, `win-x64`
-или `win-x86` (список остальных можно посмотреть в [каталоге](https://docs.microsoft.com/en-us/dotnet/core/rid-catalog))
-.
-
+Где вместо `RID` должен стоять идентификатор системы: `linux-x64`, `linux-arm`, ` osx-x64`, `win-x64` или `win-x86` (
+список остальных можно посмотреть в [каталоге](https://docs.microsoft.com/en-us/dotnet/core/rid-catalog)).  
 Пример:
 
 ```
