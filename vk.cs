@@ -27,7 +27,6 @@ internal static class Vk
         return api;
     }
 
-
     internal static VkApi LoginToVkApiWithCache()
     {
         "Reading login and password from cache...".Log();
