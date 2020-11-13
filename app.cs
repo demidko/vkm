@@ -1,14 +1,11 @@
 using System;
-using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using CommandLine;
 using VkNet.Model.Attachments;
 using VkNet.Model.RequestParams;
-using static System.ConsoleColor;
 using static System.IO.Directory;
 using static System.IO.File;
 using static Vk;
@@ -16,10 +13,9 @@ using static Vk;
 
 await Parser.Default.ParseArguments<Options>(args).WithParsedAsync(async options =>
 {
-    
     using var api = options.Login switch
     {
-        "" => LoginToVkApi(),
+        "" => LoginToVkApiWithCache(),
         _ => LoginToVkApi(options.Login, options.Password)
     };
 
@@ -28,8 +24,6 @@ await Parser.Default.ParseArguments<Options>(args).WithParsedAsync(async options
         "" => _ => true,
         _ => x => x.Title.ToUpperInvariant().Contains(options.Title)
     };
-
-    using var http = new HttpClient();
 
     var audios = api.Audio
         .Get(new AudioGetParams {Count = 6000})
@@ -40,14 +34,13 @@ await Parser.Default.ParseArguments<Options>(args).WithParsedAsync(async options
             @"$1$2.mp3"
         )));
 
-    if (!Directory.Exists(options.Path))
-    {
-        CreateDirectory(options.Path);
-    }
+    if (!Directory.Exists(options.Path)) CreateDirectory(options.Path);
+
+    using var http = new HttpClient();
 
     foreach (var (title, url) in audios)
     {
-        $"Downloading {title}...".Println(DarkBlue);
+        $"Downloading {title}...".Log();
         WriteAllBytes($"{options.Path}/{title}.mp3", await http.GetByteArrayAsync(url));
     }
 });
