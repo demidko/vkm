@@ -3,12 +3,12 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text.RegularExpressions;
-using CommandLine;
 using VkNet.Model.Attachments;
 using VkNet.Model.RequestParams;
 using static System.IO.Directory;
 using static System.IO.File;
 using static Vk;
+using CommandLine;
 
 await Parser.Default.ParseArguments<Options>(args).WithParsedAsync(async options =>
 {
@@ -17,7 +17,6 @@ await Parser.Default.ParseArguments<Options>(args).WithParsedAsync(async options
         "" => LoginToVkApiWithCache(),
         _ => LoginToVkApi(options.Login, options.Password)
     };
-
 
     Func<Audio, bool> filter = options.Title switch
     {
