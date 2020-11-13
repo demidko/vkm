@@ -16,7 +16,7 @@ dotnet publish -c Release -r RID -p:PublishSingleFile=true -p:PublishTrimmed=tru
 Пример:
 
 ```
-dotnet publish -c Release -r linux-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true
+dotnet publish -c Release -r osx-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true
 ```
 
 ### Как запускать?
