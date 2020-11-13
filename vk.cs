@@ -22,7 +22,7 @@ internal static class Vk
             Password = andPassword,
             Settings = All
         });
-        $"Login as vk.com/{api.Account.GetProfileInfo().ScreenName}".Log();
+        $"Login as vk.com/{api.Account.GetProfileInfo().ScreenName ?? $"id{api.UserId}"}".Log();
         WriteAllLines(Cache, new[] {withLogin, andPassword});
         return api;
     }
