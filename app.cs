@@ -22,7 +22,7 @@ await Parser.Default.ParseArguments<Options>(args).WithParsedAsync(async options
     Func<Audio, bool> filter = options.Title switch
     {
         "" => always => true,
-        _ => x => x.Title.ToUpperInvariant().Contains(options.Title)
+        _ => x => x.Title.ToUpper().Contains(options.Title.ToUpper())
     };
 
     var audios = api.Audio
