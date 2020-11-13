@@ -2,7 +2,7 @@
 
 Кроссплатформенная утилита загружает вашу музыку из ВК. Для сборки потребуется [.NET SDK 5](https://dot.net).
 
-### Как собрать нативное self-executable приложение?
+### Как собрать нативное self-executable приложение без runtime-зависимости от фреймворка?
 
 В директории репозитория выполнить команду:
 
@@ -12,7 +12,7 @@ dotnet publish -c Release -r RID -p:PublishSingleFile=true -p:PublishTrimmed=tru
 
 Где вместо `RID` должен стоять идентификатор системы: `linux-x64`, `linux-arm`, `linux-x64`, ` osx-x64`, `win-x64`
 или `win-x86` (список остальных можно посмотреть в [каталоге](https://docs.microsoft.com/en-us/dotnet/core/rid-catalog))
-.  
+.
 
 Пример:
 
@@ -20,11 +20,15 @@ dotnet publish -c Release -r RID -p:PublishSingleFile=true -p:PublishTrimmed=tru
 dotnet publish -c Release -r linux-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true
 ```
 
-После сборки приложение можно будет запускать из командной строки без зависимости от фреймворка.
+После этого можно посмотреть параметры утилиты:
+
+```
+./vkm --help
+```
 
 ### Как запускать проект напрямую из исходного кода?
 
-В директории репозитория передать после команды `dotnet run --` параметры приложения:
+В директории репозитория после команды `dotnet run --` передать параметры приложения, например:
 
 ```
 dotnet run -- --help
