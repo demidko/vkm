@@ -8,8 +8,9 @@
         <RootNamespace />
     </PropertyGroup>
     <ItemGroup>
-        <!--Парсер параметров командной строки-->
-        <PackageReference Include="CommandLineParser" Version="2.8.0" />
+        <!--UI-->
+        <PackageReference Include="Avalonia" Version="0.9.12" />
+        <PackageReference Include="Avalonia.Desktop" Version="0.9.12" />
         <!--VK API без необходимости вручную получать токен-->
         <PackageReference Include="VkNet" Version="1.57.0" />
         <!--Дает доступ к сообщениям, комментариям и музыке VK-->

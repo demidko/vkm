@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text.RegularExpressions;
 using VkNet.Model.Attachments;
 using VkNet.Model.RequestParams;
@@ -13,15 +12,22 @@ using CommandLine;
 
 await Parser.Default.ParseArguments<Options>(args).WithParsedAsync(async options =>
 {
+    (options.Login == null).LogWarn();
+
+    Console.ReadKey();
+
     using var api = options.Login switch
     {
-        "" => LoginToVkApiWithCache(),
-        _ => LoginToVkApi(options.Login, options.Password)
+        null => LoginToVkApiWithCache(),
+        _ => LoginToVkApi(
+            options.Login,
+            options.Password ?? throw new ArgumentException("Password wasn't set. Use --p to set password")
+        )
     };
 
     var directory = options.Directory switch
     {
-        "" => api.GetUserLink(),
+        null => api.GetUserLink(),
         _ => options.Directory
     };
 
@@ -29,7 +35,7 @@ await Parser.Default.ParseArguments<Options>(args).WithParsedAsync(async options
 
     Func<Audio, bool> filter = options.Title switch
     {
-        "" => always => true,
+        null => always => true,
         _ => x => x.Title.ToUpper().Contains(options.Title.ToUpper())
     };
 
