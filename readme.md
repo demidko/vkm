@@ -37,7 +37,7 @@ dotnet run -- --help
 
 ### TODO
 
-* Починить закачку аудио по ссылкам вида `https://psv4.vkuseraudio.net/*`
+* Починить закачку аудио по ссылкам вида `https://psv4.vkuseraudio.net/*`:  скормить hls ffmpeg'у
 
 ##### Благодарность хабраюзеру [@SuperHackerVk](https://habr.com/ru/users/superhackervk) за [способ получения mp3 ссылки](https://habr.com/ru/post/519302/)
 
