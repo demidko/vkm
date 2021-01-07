@@ -12,10 +12,6 @@ using CommandLine;
 
 await Parser.Default.ParseArguments<Options>(args).WithParsedAsync(async options =>
 {
-    (options.Login == null).LogWarn();
-
-    Console.ReadKey();
-
     using var api = options.Login switch
     {
         null => LoginToVkApiWithCache(),
