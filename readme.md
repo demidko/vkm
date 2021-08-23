@@ -19,7 +19,7 @@ dotnet publish -c Release -r RID -p:PublishSingleFile=true -p:PublishTrimmed=tru
 dotnet publish -c Release -r osx-x64 -p:PublishSingleFile=true -p:PublishTrimmed=true
 ```
 
-Смотрите также примеры здесь: https://github.com/dotnet/designs/blob/main/accepted/2020/single-file/design.md
+Смотрите также: [примеры сборки](https://github.com/dotnet/designs/blob/main/accepted/2020/single-file/design.md).
 
 ### Как запускать?
 
